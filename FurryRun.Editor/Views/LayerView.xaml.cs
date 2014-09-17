@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace FurryRun.Editor.Views
 {
     /// <summary>
-    /// Interaction logic for StageView.xaml
+    /// Interaction logic for LayerView.xaml
     /// </summary>
-    public partial class StageView : Canvas
+    public partial class LayerView : Canvas
     {
-        public StageView()
+        public LayerView()
         {
             InitializeComponent();
         }
