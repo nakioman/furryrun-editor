@@ -33,7 +33,9 @@ namespace FurryRun.Editor.Services
                     ZIndex = Convert.ToInt32(obj.@int.Single(x => x.id == "z").Value),
                     Name = obj.@str.Single(x => x.id == "name").Value,
                     Filters = MapGlitchFilters(obj.object1.Single(x => x.id == "filtersNEW")),
-                    Items = MapGlitchItems(obj.object1.Single(x => x.id == "decos"))
+                    Items = MapGlitchItems(obj.object1.Single(x => x.id == "decos")),
+                    Height = Convert.ToInt32(obj.@int.Single(x=>x.id=="h").Value),
+                    Width = Convert.ToInt32(obj.@int.Single(x => x.id == "w").Value)
                 };
                 list.Add(layer.ZIndex, layer);
             }

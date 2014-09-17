@@ -4,7 +4,7 @@ using FurryRun.Editor.Model;
 
 namespace FurryRun.Editor.ViewModels
 {
-    public class StageViewModel : Screen
+    public class StageViewModel : Conductor<IScreen>.Collection.AllActive
     {
         private readonly Stage _stage;
 
@@ -45,6 +45,11 @@ namespace FurryRun.Editor.ViewModels
         public StageViewModel(Stage stage)
         {
             _stage = stage;
+            foreach (var layer in stage.Layers.Values)
+            {
+                var viewModel = new LayerViewModel(layer);
+                ActivateItem(viewModel);
+            }
         }
     }
 }
