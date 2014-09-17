@@ -15,6 +15,6 @@ namespace FurryRun.Editor.Model
         public int Height { get { return Bottom - Top; } }
         public Color TopGradientColor { get; set; }
         public Color BottomGradientColor { get; set; }
-        public IList<Layer> Layers { get; set; }
+        public SortedList<int, Layer> Layers { get; set; }
     }
 }

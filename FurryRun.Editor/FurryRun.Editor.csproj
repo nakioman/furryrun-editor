@@ -92,7 +92,9 @@
     <Compile Include="Infrastructure\Installers\ViewModelsInstaller.cs" />
     <Compile Include="Model\GlitchLocationModel.cs" />
     <Compile Include="Services\FileManipulationService.cs" />
+    <Compile Include="Services\GlitchLocationMappingService.cs" />
     <Compile Include="Services\IFileManipulationService.cs" />
+    <Compile Include="Services\IGlitchLocationMappingService.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StageViewModel.cs" />
     <Compile Include="Views\ShellView.xaml.cs">
