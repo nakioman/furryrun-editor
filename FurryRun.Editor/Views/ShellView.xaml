@@ -17,6 +17,9 @@
                 <MenuItem Header="{DynamicResource Exit}" Name="Exit" InputGestureText="Alt+F4" />
             </MenuItem>
         </Menu>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <ContentControl x:Name="ActiveItem"></ContentControl>
+        </ScrollViewer>
     </DockPanel>
     <Window.InputBindings>
         <KeyBinding Key="F4" Modifiers="Alt" Command="{Binding LoadLocation}" />

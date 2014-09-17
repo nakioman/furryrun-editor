@@ -13,7 +13,6 @@ namespace FurryRun.Editor.Model
         public int Bottom { get; set; }
         public int Width { get { return Right - Left; } }
         public int Height { get { return Bottom - Top; } }
-        public int ZIndex { get; set; }
         public Color TopGradientColor { get; set; }
         public Color BottomGradientColor { get; set; }
         public IList<Layer> Layers { get; set; }

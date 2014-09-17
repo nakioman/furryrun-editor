@@ -2,6 +2,7 @@
 using Castle.Core;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Castle.Windsor.Installer;
 
 namespace FurryRun.Editor.Infrastructure
 {
@@ -9,19 +10,7 @@ namespace FurryRun.Editor.Infrastructure
     {
         public ApplicationContainer()
         {
-            Register(
-                Component.For<IWindowManager>().ImplementedBy<WindowManager>().LifeStyle.Is(LifestyleType.Singleton),
-                Component.For<IEventAggregator>().ImplementedBy<EventAggregator>().LifeStyle.Is(LifestyleType.Singleton)
-                );
-
-            RegisterViewModels();
-        }
-
-        private void RegisterViewModels()
-        {
-            Register(Types.FromAssembly(GetType().Assembly)
-                .Where(x => x.Name.EndsWith("ViewModel"))
-                .Configure(x => x.LifeStyle.Is(LifestyleType.Transient)));
+            Install(FromAssembly.This());
         }
     }
 }
