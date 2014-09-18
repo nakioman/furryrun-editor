@@ -9,6 +9,6 @@ namespace FurryRun.Editor.Services
         SortedList<int, Layer> MapGlitchLayers(@object layerObj);
         IList<Filter> MapGlitchFilters(@object single);
         Stage MapGlitchObjectToStage(@object obj);
-        SortedList<int, LayerItem> MapGlitchItems(@object decos);
+        SortedList<int, LayerItem> MapGlitchItems(@object decos, Layer layer);
     }
 }

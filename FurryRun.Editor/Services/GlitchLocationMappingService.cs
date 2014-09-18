@@ -33,16 +33,16 @@ namespace FurryRun.Editor.Services
                     ZIndex = Convert.ToInt32(obj.@int.Single(x => x.id == "z").Value),
                     Name = obj.@str.Single(x => x.id == "name").Value,
                     Filters = MapGlitchFilters(obj.object1.Single(x => x.id == "filtersNEW")),
-                    Items = MapGlitchItems(obj.object1.Single(x => x.id == "decos")),
-                    Height = Convert.ToInt32(obj.@int.Single(x=>x.id=="h").Value),
+                    Height = Convert.ToInt32(obj.@int.Single(x => x.id == "h").Value),
                     Width = Convert.ToInt32(obj.@int.Single(x => x.id == "w").Value)
                 };
+                layer.Items = MapGlitchItems(obj.object1.Single(x => x.id == "decos"), layer);
                 list.Add(layer.ZIndex, layer);
             }
             return list;
         }
 
-        public SortedList<int, LayerItem> MapGlitchItems(@object decos)
+        public SortedList<int, LayerItem> MapGlitchItems(@object decos, Layer layer)
         {
             var items = new SortedList<int, LayerItem>();
             foreach (var obj in decos.object1)
@@ -55,7 +55,8 @@ namespace FurryRun.Editor.Services
                     Y = Convert.ToInt32(obj.@int.Single(x => x.id == "y").Value),
                     ZIndex = Convert.ToInt32(obj.@int.Single(x => x.id == "z").Value),
                     Name = obj.str.Single(x => x.id == "name").Value,
-                    SpriteClass = obj.str.Single(x => x.id == "sprite_class").Value
+                    SpriteClass = obj.str.Single(x => x.id == "sprite_class").Value,
+                    Layer = layer,
                 };
                 var rotate = obj.@int.SingleOrDefault(x => x.id == "r");
                 if (rotate != null)
