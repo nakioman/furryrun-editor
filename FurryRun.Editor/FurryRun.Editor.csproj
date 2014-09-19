@@ -102,8 +102,14 @@
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StageViewModel.cs" />
+    <Compile Include="Views\Layer.ListItem.xaml.cs">
+      <DependentUpon>Layer.ListItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LayerItemView.xaml.cs">
       <DependentUpon>LayerItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stage.LayersWindow.xaml.cs">
+      <DependentUpon>Stage.LayersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LayerView.xaml.cs">
       <DependentUpon>LayerView.xaml</DependentUpon>
@@ -156,7 +162,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Layer.ListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LayerItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stage.LayersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

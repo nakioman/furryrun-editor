@@ -59,5 +59,15 @@ namespace FurryRun.Editor.ViewModels
                 NotifyOfPropertyChange(() => Width);
             }
         }
+
+        public Visibility Visibility
+        {
+            get { return _layer.Visible ? Visibility.Visible : Visibility.Hidden; }
+            set
+            {
+                _layer.Visible = value == Visibility.Visible;
+                NotifyOfPropertyChange(() => Visibility);
+            }
+        }
     }
 }

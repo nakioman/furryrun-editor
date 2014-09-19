@@ -1,0 +1,19 @@
+﻿<Window x:Class="FurryRun.Editor.Views.LayersWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cal="http://www.caliburnproject.org"
+        Title="hohoho" Height="300" Width="300" 
+        >
+    <ListBox x:Name="Layers">
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical"/>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <ContentControl cal:View.Model="{Binding}" cal:View.Context="ListItem" Margin="0" Background="Transparent"/>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</Window>

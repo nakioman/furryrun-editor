@@ -35,6 +35,7 @@ namespace FurryRun.Editor.Services
                     Filters = MapGlitchFilters(obj.object1.Single(x => x.id == "filtersNEW")),
                     Height = Convert.ToInt32(obj.@int.Single(x => x.id == "h").Value),
                     Width = Convert.ToInt32(obj.@int.Single(x => x.id == "w").Value),
+                    Visible = true,
                 };
                 layer.Items = MapGlitchItems(obj.object1.Single(x => x.id == "decos"), layer);
                 list.Add(layer.ZIndex, layer);

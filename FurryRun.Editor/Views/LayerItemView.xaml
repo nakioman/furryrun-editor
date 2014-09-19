@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" RenderTransformOrigin="0.5,0.5"
-       Width="{Binding Width}" ToolTip="{Binding Test}"  Height="{Binding Height}" 
+       Width="{Binding Width}"  Height="{Binding Height}" 
        Source="{Binding SpriteFullPath}" Margin="{Binding Margin}" >
     <Image.LayoutTransform>
         <TransformGroup>
