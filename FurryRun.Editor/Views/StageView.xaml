@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:FurryRun.Editor.ViewModels"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              mc:Ignorable="d" Width="{Binding Width}" Height="{Binding Height}"
-             cal:Bind.AtDesignTime="True" HorizontalAlignment="Left"
+             cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=vm:StageViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Canvas.Background>
@@ -15,7 +15,7 @@
             <GradientStop Color="{Binding TopGradientColor}" Offset="1"/>
         </LinearGradientBrush>
     </Canvas.Background>
-    <ItemsControl ItemsSource="{Binding Path=Items}" Height="{Binding Height}" Width="{Binding Width}" Background="Transparent" Canvas.Left="0" Canvas.Top="0">
+    <ItemsControl ItemsSource="{Binding Path=Items}" >
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <Canvas />
@@ -23,7 +23,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <ContentControl  cal:View.Model="{Binding}" Background="Transparent"/>
+                <ContentControl  cal:View.Model="{Binding}" />
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

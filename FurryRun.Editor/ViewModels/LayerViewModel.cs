@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
 using FurryRun.Editor.Model;
 
@@ -12,7 +13,7 @@ namespace FurryRun.Editor.ViewModels
         public LayerViewModel(Layer layer)
         {
             _layer = layer;
-            foreach (var layerItem in layer.Items.Values.Reverse())
+            foreach (var layerItem in layer.Items.Values)
             {
                 var viewModel = new LayerItemViewModel(layerItem);
                 ActivateItem(viewModel);
@@ -56,6 +57,15 @@ namespace FurryRun.Editor.ViewModels
             {
                 _layer.Height = value;
                 NotifyOfPropertyChange(() => Width);
+            }
+        }
+
+        public Thickness Margin
+        {
+            get
+            {
+                var top = _layer.Stage.Height - Height;
+                return new Thickness(0, top, 0, 0);
             }
         }
     }

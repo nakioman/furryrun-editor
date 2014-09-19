@@ -14,6 +14,7 @@ namespace FurryRun.Editor.Model
         //TODO add player to middleground
         //TODO Pathfinding
 
-        public SortedList<int, LayerItem> Items { get; set; } 
+        public SortedList<int, LayerItem> Items { get; set; }
+        public Stage Stage { get; set; }
     }
 }

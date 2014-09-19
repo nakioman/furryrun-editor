@@ -19,11 +19,11 @@ namespace FurryRun.Editor.Services
         public Stage MapGlitchLocationFileToModel(game_object gameObject)
         {
             var stage = MapGlitchObjectToStage(gameObject.@object.Single());
-            stage.Layers = MapGlitchLayers(gameObject.@object.Single().object1.Single(x => x.id == "layers"));
+            stage.Layers = MapGlitchLayers(gameObject.@object.Single().object1.Single(x => x.id == "layers"), stage);
             return stage;
         }
 
-        public SortedList<int, Layer> MapGlitchLayers(@object layerObj)
+        public SortedList<int, Layer> MapGlitchLayers(@object layerObj, Stage stage)
         {
             var list = new SortedList<int, Layer>();
             foreach (var obj in layerObj.object1)
@@ -34,7 +34,8 @@ namespace FurryRun.Editor.Services
                     Name = obj.@str.Single(x => x.id == "name").Value,
                     Filters = MapGlitchFilters(obj.object1.Single(x => x.id == "filtersNEW")),
                     Height = Convert.ToInt32(obj.@int.Single(x => x.id == "h").Value),
-                    Width = Convert.ToInt32(obj.@int.Single(x => x.id == "w").Value)
+                    Width = Convert.ToInt32(obj.@int.Single(x => x.id == "w").Value),
+                    Stage = stage
                 };
                 layer.Items = MapGlitchItems(obj.object1.Single(x => x.id == "decos"), layer);
                 list.Add(layer.ZIndex, layer);
@@ -45,18 +46,25 @@ namespace FurryRun.Editor.Services
         public SortedList<int, LayerItem> MapGlitchItems(@object decos, Layer layer)
         {
             var items = new SortedList<int, LayerItem>();
+            //FIX middleground items, they are handle a bit different;
+            var middleGroundFixX = 0;
+            var middleGroundFixY = 0;
+            if (layer.Name == "middleground")
+            {
+                middleGroundFixX = layer.Width /2;
+                middleGroundFixY = layer.Height;
+            }
             foreach (var obj in decos.object1)
             {
                 var item = new LayerItem
                 {
                     Height = Convert.ToInt32(obj.@int.Single(x => x.id == "h").Value),
                     Width = Convert.ToInt32(obj.@int.Single(x => x.id == "w").Value),
-                    X = Convert.ToInt32(obj.@int.Single(x => x.id == "x").Value),
-                    Y = Convert.ToInt32(obj.@int.Single(x => x.id == "y").Value),
+                    X = Convert.ToInt32(obj.@int.Single(x => x.id == "x").Value) + middleGroundFixX,
+                    Y = Convert.ToInt32(obj.@int.Single(x => x.id == "y").Value) + middleGroundFixY,
                     ZIndex = Convert.ToInt32(obj.@int.Single(x => x.id == "z").Value),
                     Name = obj.str.Single(x => x.id == "name").Value,
-                    SpriteClass = obj.str.Single(x => x.id == "sprite_class").Value,
-                    Layer = layer,
+                    SpriteClass = obj.str.Single(x => x.id == "sprite_class").Value
                 };
                 var rotate = obj.@int.SingleOrDefault(x => x.id == "r");
                 if (rotate != null)
@@ -120,12 +128,14 @@ namespace FurryRun.Editor.Services
 
         public Stage MapGlitchObjectToStage(@object obj)
         {
+            var left = Convert.ToInt32(obj.@int.Single(x => x.id == "l").Value);
+            var right = Convert.ToInt32(obj.@int.Single(x => x.id == "r").Value);
+            var top = Convert.ToInt32(obj.@int.Single(x => x.id == "t").Value);
+            var bottom = Convert.ToInt32(obj.@int.Single(x => x.id == "b").Value);
             var stage = new Stage
             {
-                Left = Convert.ToInt32(obj.@int.Single(x => x.id == "l").Value),
-                Right = Convert.ToInt32(obj.@int.Single(x => x.id == "r").Value),
-                Top = Convert.ToInt32(obj.@int.Single(x => x.id == "t").Value),
-                Bottom = Convert.ToInt32(obj.@int.Single(x => x.id == "b").Value),
+                Width = right - left,
+                Height = bottom - top,
                 Id = obj.str.Single(x => x.id == "tsid").Value,
                 Label = obj.str.Single(x => x.id == "label").Value,
             };
@@ -133,10 +143,10 @@ namespace FurryRun.Editor.Services
             var gradient = obj.object1.SingleOrDefault(x => x.id == "gradient");
             if (gradient != null)
             {
-                var bottom = System.Drawing.ColorTranslator.FromHtml("#" + gradient.str.Single(x => x.id == "bottom").Value);
-                stage.BottomGradientColor = Color.FromArgb(bottom.A, bottom.R, bottom.G, bottom.B);
-                var top = System.Drawing.ColorTranslator.FromHtml("#" + gradient.str.Single(x => x.id == "top").Value);
-                stage.TopGradientColor = Color.FromArgb(top.A, top.R, top.G, top.B);
+                var bottomGradient = System.Drawing.ColorTranslator.FromHtml("#" + gradient.str.Single(x => x.id == "bottom").Value);
+                stage.BottomGradientColor = Color.FromArgb(bottomGradient.A, bottomGradient.R, bottomGradient.G, bottomGradient.B);
+                var topGradient = System.Drawing.ColorTranslator.FromHtml("#" + gradient.str.Single(x => x.id == "top").Value);
+                stage.TopGradientColor = Color.FromArgb(topGradient.A, topGradient.R, topGradient.G, topGradient.B);
             }
 
             return stage;

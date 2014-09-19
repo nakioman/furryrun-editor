@@ -17,6 +17,7 @@ namespace FurryRun.Editor.ViewModels
                 _layerItem.X = value;
                 NotifyOfPropertyChange(() => X);
                 NotifyOfPropertyChange(() => Margin);
+
             }
         }
 
@@ -33,13 +34,15 @@ namespace FurryRun.Editor.ViewModels
 
         public int Height
         {
-            get { return Rotate != 0 ? _layerItem.Height * 2 : _layerItem.Height; }
+            get
+            {
+                return _layerItem.Height;
+            }
             set
             {
                 _layerItem.Height = value;
                 NotifyOfPropertyChange(() => Height);
                 NotifyOfPropertyChange(() => Margin);
-                NotifyOfPropertyChange(() => CanvasHeight);
             }
         }
 
@@ -51,7 +54,6 @@ namespace FurryRun.Editor.ViewModels
                 _layerItem.Width = value;
                 NotifyOfPropertyChange(() => Width);
                 NotifyOfPropertyChange(() => Margin);
-                NotifyOfPropertyChange(() => CanvasWidth);
             }
         }
 
@@ -62,25 +64,6 @@ namespace FurryRun.Editor.ViewModels
             {
                 _layerItem.Rotate = value;
                 NotifyOfPropertyChange(() => Rotate);
-                NotifyOfPropertyChange(() => CanvasWidth);
-                NotifyOfPropertyChange(() => CanvasHeight);
-                NotifyOfPropertyChange(() => RotateCanvas);
-                NotifyOfPropertyChange(() => TranslateX);
-                NotifyOfPropertyChange(() => TranslateY);
-                NotifyOfPropertyChange(() => ImageMargin);
-                NotifyOfPropertyChange(() => Height);
-            }
-        }
-
-        public int CanvasWidth
-        {
-            get
-            {
-                if (Rotate != 0)
-                {
-                    return (int)Math.Sqrt(Math.Pow(Height * 2, 2) + Math.Pow(Height, 2));
-                }
-                return _layerItem.Width;
             }
         }
 
@@ -99,7 +82,7 @@ namespace FurryRun.Editor.ViewModels
         {
             get
             {
-                return String.Format("D:\\Projects\\CAT422-glitch-location-viewer\\img\\scenery\\{0}.png", SpriteClass);
+                return String.Format("C:\\Projects\\glitch_assets\\CAT422-glitch-location-viewer-master\\img\\scenery\\{0}.png", SpriteClass);
             }
         }
 
@@ -107,53 +90,7 @@ namespace FurryRun.Editor.ViewModels
         {
             get
             {
-                var x = 0;
-                var y = 0;
-                if (_layerItem.Layer.Name == "middleground")
-                {
-                    x = X - (CanvasWidth / 2) + (_layerItem.Layer.Width / 2);
-                    y = Y - (CanvasHeight / 2) + (_layerItem.Layer.Height / 2);
-                    return new Thickness(x, y, 0, 0);
-                }
-                x = X - (CanvasWidth / 2);
-                y = Y - (CanvasHeight / 2);
-                return new Thickness(x, y, 0, 0);
-            }
-        }
-
-        public int CanvasHeight
-        {
-            get
-            {
-                if (Rotate != 0)
-                {
-                    return (int)Math.Sqrt(Math.Pow(Height * 2, 2) + Math.Pow(Height, 2));
-                }
-                return Height * 2;
-            }
-        }
-
-        public Thickness ImageMargin
-        {
-            get
-            {
-                if (Rotate != 0)
-                {
-                    return new Thickness(-(Width / 2), -Height, 0, 0);
-                }
-                return _layerItem.Flip
-                    ? new Thickness(-_layerItem.Width, 0, 0, 0)
-                    : new Thickness(0, 0, 0, 0);
-            }
-        }
-
-        public int ZIndex
-        {
-            get { return _layerItem.ZIndex; }
-            set
-            {
-                _layerItem.ZIndex = value;
-                NotifyOfPropertyChange(() => ZIndex);
+                return new Thickness(X - (Width / 2), Y - Height, 0, 0);
             }
         }
 
@@ -167,21 +104,6 @@ namespace FurryRun.Editor.ViewModels
             get { return _layerItem.Flip ? -1 : 1; }
         }
 
-        public int TranslateX
-        {
-            get { return Rotate != 0 ? CanvasWidth / 2 : 0; }
-        }
-
-        public int TranslateY
-        {
-            get { return Rotate != 0 ? CanvasHeight / 2 : 0; }
-        }
-
-        public double RotateCanvas
-        {
-            get { return (Math.PI / 180 * Rotate); }
-        }
-
         public bool Flip
         {
             get { return _layerItem.Flip; }
@@ -189,9 +111,22 @@ namespace FurryRun.Editor.ViewModels
             {
                 _layerItem.Flip = value;
                 NotifyOfPropertyChange(() => Flip);
-                NotifyOfPropertyChange(() => ImageMargin);
                 NotifyOfPropertyChange(() => ScaleX);
+                NotifyOfPropertyChange(() => TranslateX);
             }
+        }
+
+        public string Test
+        {
+            get
+            {
+                return String.Format("{0} {1} {2} {3}", null, _layerItem.SpriteClass, _layerItem.Rotate, _layerItem.Flip);
+            }
+        }
+
+        public int TranslateX
+        {
+            get { return Flip ? -Width : 0; }
         }
     }
 }

@@ -11,7 +11,5 @@
         public int Y { get; set; }
         public string Name { get; set; }
         public string SpriteClass { get; set; }
-
-        public Layer Layer { get; set; }
     }
 }
