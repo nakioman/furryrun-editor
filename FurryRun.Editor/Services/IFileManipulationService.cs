@@ -6,5 +6,6 @@ namespace FurryRun.Editor.Services
     {
         Stage ImportGlitchLocationFile(string filename);
         game_object DeserializeGlitchLocationFile(string filename);
+        void SaveOptions(Options options);
     }
 }

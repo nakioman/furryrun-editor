@@ -13,6 +13,7 @@ namespace FurryRun.Editor.Services
     {
         private readonly IGlitchLocationMappingService _mappingService;
         private ILogger _logger = NullLogger.Instance;
+        private const string OptionsFileName = "options.xml";
         public ILogger Logger
         {
             get { return _logger; }
@@ -31,7 +32,7 @@ namespace FurryRun.Editor.Services
             return stage;
         }
 
-        
+
 
         public game_object DeserializeGlitchLocationFile(string filename)
         {
@@ -58,6 +59,34 @@ namespace FurryRun.Editor.Services
             {
                 Logger.Error("There was an error trying to load the glitch location file", exception);
                 throw;
+            }
+        }
+
+        public static Options LoadOptions()
+        {
+            try
+            {
+                using (var stream = new FileStream(OptionsFileName, FileMode.Open, FileAccess.Read))
+                {
+                    using (var xmlReader = XmlReader.Create(stream))
+                    {
+                        var xmlSerializer = new XmlSerializer(typeof(Options));
+                        return (Options)xmlSerializer.Deserialize(xmlReader);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Options();
+            }
+        }
+
+        public void SaveOptions(Options options)
+        {
+            using (var stream = new FileStream(OptionsFileName, FileMode.Create, FileAccess.Write))
+            {
+                var xmlSerializer = new XmlSerializer(typeof (Options));
+                xmlSerializer.Serialize(stream, options);
             }
         }
     }

@@ -15,6 +15,5 @@ namespace FurryRun.Editor.Model
         //TODO Pathfinding
 
         public SortedList<int, LayerItem> Items { get; set; }
-        public Stage Stage { get; set; }
     }
 }

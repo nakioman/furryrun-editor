@@ -1,0 +1,22 @@
+﻿<Window x:Class="FurryRun.Editor.Views.OptionsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        HorizontalAlignment="Center" VerticalAlignment="Center"
+        ResizeMode="NoResize" ShowInTaskbar="False" 
+        Title="{DynamicResource Options}" Height="90" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource AssetsFolder}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding AssetsFolder}"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="..." x:Name="SelectFolder" />
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  Content="{DynamicResource Save}" HorizontalAlignment="Right" Margin="0,0,10,0" x:Name="TryClose"  />
+    </Grid>
+</Window>

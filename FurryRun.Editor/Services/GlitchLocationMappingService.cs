@@ -19,11 +19,11 @@ namespace FurryRun.Editor.Services
         public Stage MapGlitchLocationFileToModel(game_object gameObject)
         {
             var stage = MapGlitchObjectToStage(gameObject.@object.Single());
-            stage.Layers = MapGlitchLayers(gameObject.@object.Single().object1.Single(x => x.id == "layers"), stage);
+            stage.Layers = MapGlitchLayers(gameObject.@object.Single().object1.Single(x => x.id == "layers"));
             return stage;
         }
 
-        public SortedList<int, Layer> MapGlitchLayers(@object layerObj, Stage stage)
+        public SortedList<int, Layer> MapGlitchLayers(@object layerObj)
         {
             var list = new SortedList<int, Layer>();
             foreach (var obj in layerObj.object1)
@@ -35,7 +35,6 @@ namespace FurryRun.Editor.Services
                     Filters = MapGlitchFilters(obj.object1.Single(x => x.id == "filtersNEW")),
                     Height = Convert.ToInt32(obj.@int.Single(x => x.id == "h").Value),
                     Width = Convert.ToInt32(obj.@int.Single(x => x.id == "w").Value),
-                    Stage = stage
                 };
                 layer.Items = MapGlitchItems(obj.object1.Single(x => x.id == "decos"), layer);
                 list.Add(layer.ZIndex, layer);
@@ -64,7 +63,7 @@ namespace FurryRun.Editor.Services
                     Y = Convert.ToInt32(obj.@int.Single(x => x.id == "y").Value) + middleGroundFixY,
                     ZIndex = Convert.ToInt32(obj.@int.Single(x => x.id == "z").Value),
                     Name = obj.str.Single(x => x.id == "name").Value,
-                    SpriteClass = obj.str.Single(x => x.id == "sprite_class").Value
+                    SpriteClass = String.Format("{0}.png", obj.str.Single(x => x.id == "sprite_class").Value)
                 };
                 var rotate = obj.@int.SingleOrDefault(x => x.id == "r");
                 if (rotate != null)

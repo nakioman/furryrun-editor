@@ -5,4 +5,9 @@
     <system:String x:Key="File">_FILE</system:String>
     <system:String x:Key="Exit">_Exit</system:String>
     <system:String x:Key="AppTitle">Furry Run Level Editor</system:String>
+    <system:String x:Key="AssetsFolder">Assets folder:</system:String>
+    <system:String x:Key="Save">Save</system:String>
+    <system:String x:Key="Close">Close</system:String>
+    <system:String x:Key="Options">Options</system:String>
+    <system:String x:Key="Tools">_TOOLS</system:String>
 </ResourceDictionary>

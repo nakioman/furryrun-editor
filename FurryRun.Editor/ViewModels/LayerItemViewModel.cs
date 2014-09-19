@@ -1,13 +1,16 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using Caliburn.Micro;
 using FurryRun.Editor.Model;
+using FurryRun.Editor.Services;
 
 namespace FurryRun.Editor.ViewModels
 {
     public class LayerItemViewModel : Screen
     {
         private readonly LayerItem _layerItem;
+        private readonly string _assetsFolder;
 
         public int X
         {
@@ -82,7 +85,7 @@ namespace FurryRun.Editor.ViewModels
         {
             get
             {
-                return String.Format("C:\\Projects\\glitch_assets\\CAT422-glitch-location-viewer-master\\img\\scenery\\{0}.png", SpriteClass);
+                return Path.Combine(_assetsFolder, SpriteClass);
             }
         }
 
@@ -92,12 +95,7 @@ namespace FurryRun.Editor.ViewModels
             {
                 return new Thickness(X - (Width / 2), Y - Height, 0, 0);
             }
-        }
-
-        public LayerItemViewModel(LayerItem layerItem)
-        {
-            _layerItem = layerItem;
-        }
+        }        
 
         public int ScaleX
         {
@@ -114,19 +112,18 @@ namespace FurryRun.Editor.ViewModels
                 NotifyOfPropertyChange(() => ScaleX);
                 NotifyOfPropertyChange(() => TranslateX);
             }
-        }
-
-        public string Test
-        {
-            get
-            {
-                return String.Format("{0} {1} {2} {3}", null, _layerItem.SpriteClass, _layerItem.Rotate, _layerItem.Flip);
-            }
-        }
+        }        
 
         public int TranslateX
         {
             get { return Flip ? -Width : 0; }
+        }
+
+        public LayerItemViewModel(LayerItem layerItem)
+        {
+            _layerItem = layerItem;
+            var options = FileManipulationService.LoadOptions();
+            _assetsFolder = options.AssetsFolder;
         }
     }
 }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              mc:Ignorable="d" Canvas.ZIndex="{Binding ZIndex}" Height="{Binding Height}" Width="{Binding Width}" 
-             d:DesignHeight="300" d:DesignWidth="300" Margin="{Binding Margin}">
+             d:DesignHeight="300" d:DesignWidth="300" >
     <ItemsControl ItemsSource="{Binding Path=Items}" >
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>

@@ -59,14 +59,5 @@ namespace FurryRun.Editor.ViewModels
                 NotifyOfPropertyChange(() => Width);
             }
         }
-
-        public Thickness Margin
-        {
-            get
-            {
-                var top = _layer.Stage.Height - Height;
-                return new Thickness(0, top, 0, 0);
-            }
-        }
     }
 }
