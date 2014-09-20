@@ -38,6 +38,9 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\packages\Caliburn.Micro.Core.2.0.1\lib\net45\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="Caliburn.Micro.Logging">
+      <HintPath>..\packages\Caliburn.Micro.Logging.2.0.3.0\lib\portable-net45+win+wpa81+wp80\Caliburn.Micro.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Micro.Platform">
       <HintPath>..\packages\Caliburn.Micro.2.0.1\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
@@ -84,10 +87,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Caliburn\Micro\Logging\DebugLogger.cs" />
     <Compile Include="EditorBootstrapper.cs" />
     <Compile Include="Infrastructure\ApplicationContainer.cs" />
     <Compile Include="Infrastructure\CastleBootstrapper.cs" />
+    <Compile Include="Infrastructure\CustomWindowManager.cs" />
     <Compile Include="Infrastructure\ForEachExtension.cs" />
+    <Compile Include="Infrastructure\ICustomWindowManager.cs" />
     <Compile Include="Infrastructure\Installers\CaliburnInstaller.cs" />
     <Compile Include="Infrastructure\Installers\ServicesInstaller.cs" />
     <Compile Include="Infrastructure\Installers\ViewModelsInstaller.cs" />
@@ -102,14 +108,14 @@
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StageViewModel.cs" />
-    <Compile Include="Views\Layer.ListItem.xaml.cs">
+    <Compile Include="Views\Layer\Layer.ListItem.xaml.cs">
       <DependentUpon>Layer.ListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LayerItemView.xaml.cs">
       <DependentUpon>LayerItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Stage.LayersWindow.xaml.cs">
-      <DependentUpon>Stage.LayersWindow.xaml</DependentUpon>
+    <Compile Include="Views\Stage\LayersWindow.xaml.cs">
+      <DependentUpon>LayersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LayerView.xaml.cs">
       <DependentUpon>LayerView.xaml</DependentUpon>
@@ -162,7 +168,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layer.ListItem.xaml">
+    <Page Include="Views\Layer\Layer.ListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,7 +176,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Stage.LayersWindow.xaml">
+    <Page Include="Views\Stage\LayersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

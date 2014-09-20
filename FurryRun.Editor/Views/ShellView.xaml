@@ -16,6 +16,9 @@
                 <Separator />
                 <MenuItem Header="{DynamicResource Exit}" Name="Exit" InputGestureText="Alt+F4" />
             </MenuItem>
+            <MenuItem Header="{DynamicResource View}">
+                <MenuItem Header="{DynamicResource Layers}" IsCheckable="True" IsChecked="{Binding LayersVisible}" />
+            </MenuItem>
             <MenuItem Header="{DynamicResource Tools}">
                 <MenuItem Header="{DynamicResource Options}" Name="Options" />
             </MenuItem>

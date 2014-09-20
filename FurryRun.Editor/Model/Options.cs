@@ -2,6 +2,7 @@
 {
     public class Options
     {
-        public string AssetsFolder { get; set; } 
+        public string AssetsFolder { get; set; }
+        public bool LayersWindowVisible { get; set; }
     }
 }

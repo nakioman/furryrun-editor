@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 using Caliburn.Micro;
 using FurryRun.Editor.Model;
@@ -53,9 +54,9 @@ namespace FurryRun.Editor.ViewModels
             }
         }
 
-        public IObservableCollection<LayerViewModel> Layers
+        public IObservableCollection<IScreen> Layers
         {
-            get { return (IObservableCollection<LayerViewModel>) Items.Cast<LayerViewModel>(); }
+            get { return Items; }
         }
     }
 }

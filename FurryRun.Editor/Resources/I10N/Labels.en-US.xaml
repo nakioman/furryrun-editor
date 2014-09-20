@@ -10,4 +10,6 @@
     <system:String x:Key="Close">Close</system:String>
     <system:String x:Key="Options">Options</system:String>
     <system:String x:Key="Tools">_TOOLS</system:String>
+    <system:String x:Key="Layers">Layers</system:String>
+    <system:String x:Key="View">_VIEW</system:String>
 </ResourceDictionary>
