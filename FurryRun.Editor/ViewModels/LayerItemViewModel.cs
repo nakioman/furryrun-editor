@@ -95,7 +95,7 @@ namespace FurryRun.Editor.ViewModels
             {
                 return new Thickness(X - (Width / 2), Y - Height, 0, 0);
             }
-        }        
+        }
 
         public int ScaleX
         {
@@ -112,7 +112,7 @@ namespace FurryRun.Editor.ViewModels
                 NotifyOfPropertyChange(() => ScaleX);
                 NotifyOfPropertyChange(() => TranslateX);
             }
-        }        
+        }
 
         public int TranslateX
         {
@@ -124,6 +124,32 @@ namespace FurryRun.Editor.ViewModels
             _layerItem = layerItem;
             var options = FileManipulationService.LoadOptions();
             _assetsFolder = options.AssetsFolder;
+        }
+
+        public Visibility Visibility
+        {
+            get { return _layerItem.Visible ? Visibility.Visible : Visibility.Hidden; }
+        }
+
+        public bool Visible
+        {
+            get { return _layerItem.Visible; }
+            set
+            {
+                _layerItem.Visible = value;
+                NotifyOfPropertyChange(() => Visible);
+                NotifyOfPropertyChange(() => Visibility);
+            }
+        }
+
+        public string Name
+        {
+            get { return _layerItem.Name; }
+            set
+            {
+                _layerItem.Name = value;
+                NotifyOfPropertyChange(() => Name);
+            }
         }
     }
 }

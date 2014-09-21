@@ -10,6 +10,11 @@ namespace FurryRun.Editor.ViewModels
     {
         private readonly Layer _layer;
 
+        public LayerViewModel()
+        {
+            
+        }
+
         public LayerViewModel(Layer layer)
         {
             _layer = layer;
@@ -73,6 +78,20 @@ namespace FurryRun.Editor.ViewModels
                 _layer.Visible = value;
                 NotifyOfPropertyChange(() => Visible);
                 NotifyOfPropertyChange(() => Visibility);
+            }
+        }
+
+        private bool _selected;
+        public bool IsSelectedItem
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                _selected = value;
+                NotifyOfPropertyChange(() => IsSelectedItem);
             }
         }
     }

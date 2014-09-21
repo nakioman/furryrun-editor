@@ -108,11 +108,17 @@
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StageViewModel.cs" />
-    <Compile Include="Views\Layer\Layer.ListItem.xaml.cs">
-      <DependentUpon>Layer.ListItem.xaml</DependentUpon>
+    <Compile Include="Views\LayerItem\ListItem.xaml.cs">
+      <DependentUpon>ListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layer\ListItem.xaml.cs">
+      <DependentUpon>ListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LayerItemView.xaml.cs">
       <DependentUpon>LayerItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layer\LayersItemWindow.xaml.cs">
+      <DependentUpon>LayersItemWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Stage\LayersWindow.xaml.cs">
       <DependentUpon>LayersWindow.xaml</DependentUpon>
@@ -168,11 +174,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layer\Layer.ListItem.xaml">
+    <Page Include="Views\LayerItem\ListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layer\ListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LayerItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layer\LayersItemWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,6 +214,7 @@
   <ItemGroup>
     <Resource Include="Resources\Images\ImportIcon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

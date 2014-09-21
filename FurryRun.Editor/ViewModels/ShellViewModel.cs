@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Dynamic;
 using System.Windows;
 using Caliburn.Micro;
@@ -16,6 +17,7 @@ namespace FurryRun.Editor.ViewModels
         private StageViewModel _stageViewModel;
         private readonly Options _options;
         private Window _layersWindow;
+        private Window _layerItemsWindow;
 
 
         public ShellViewModel(IFileManipulationService fileManipulationService, ICustomWindowManager windowManager)
@@ -39,8 +41,22 @@ namespace FurryRun.Editor.ViewModels
             {
                 var stage = _fileManipulationService.ImportGlitchLocationFile(dlg.FileName);
                 _stageViewModel = new StageViewModel(stage);
+                _stageViewModel.PropertyChanged += _stageViewModel_PropertyChanged;
                 ActivateItem(_stageViewModel);
                 Layers();
+                LayerItems();
+            }
+        }
+
+        void _stageViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedItem")
+            {
+                if (_layerItemsWindow != null)
+                {
+                    _layerItemsWindow.DataContext = _stageViewModel.SelectedItem;
+                    _layerItemsWindow.Title = Application.Current.Resources["Images"].ToString();
+                }
             }
         }
 
@@ -65,8 +81,8 @@ namespace FurryRun.Editor.ViewModels
                 else
                 {
                     dynamic settings = new ExpandoObject();
-                    settings.WindowStyle = WindowStyle.ToolWindow;
-                    settings.ShowInTaskbar = false;
+                    settings.Owner = this.GetView();
+                    settings.TopMost = true;
                     settings.Title = Application.Current.Resources["Layers"].ToString();
                     _layersWindow = _windowManager.GetWindow(_stageViewModel, "LayersWindow", settings);
                     _layersWindow.Closing += _layersWindow_Closing;
@@ -77,6 +93,36 @@ namespace FurryRun.Editor.ViewModels
             {
                 _layersWindow.Hide();
             }
+        }
+
+        public void LayerItems()
+        {
+            if (LayerItemsVisible && _stageViewModel != null)
+            {
+                if (_layerItemsWindow != null)
+                {
+                    _layerItemsWindow.Show();
+                }
+                else
+                {
+                    dynamic settings = new ExpandoObject();
+                    settings.Owner = this.GetView();
+                    settings.TopMost = true;
+                    settings.Title = Application.Current.Resources["Images"].ToString();
+                    _layerItemsWindow = _windowManager.GetWindow(_stageViewModel.SelectedItem, "LayersItemWindow", settings);
+                    _layerItemsWindow.Closing += LayerItemsWindowOnClosing;
+                    _layerItemsWindow.Show();
+                }
+            }
+            else if (_layerItemsWindow != null)
+            {
+                _layerItemsWindow.Hide();
+            }
+        }
+
+        private void LayerItemsWindowOnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            LayerItemsVisible = !LayerItemsVisible;
         }
 
         void _layersWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -98,6 +144,18 @@ namespace FurryRun.Editor.ViewModels
                 _fileManipulationService.SaveOptions(_options);
                 NotifyOfPropertyChange(() => LayersVisible);
                 Layers();
+            }
+        }
+
+        public bool LayerItemsVisible
+        {
+            get { return _options.LayersItemWindowVisible; }
+            set
+            {
+                _options.LayersItemWindowVisible = value;
+                _fileManipulationService.SaveOptions(_options);
+                NotifyOfPropertyChange(() => LayerItemsVisible);
+                LayerItems();
             }
         }
 

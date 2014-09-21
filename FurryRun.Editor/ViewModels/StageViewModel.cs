@@ -50,13 +50,35 @@ namespace FurryRun.Editor.ViewModels
             foreach (var layer in stage.Layers.Values)
             {
                 var viewModel = new LayerViewModel(layer);
+                viewModel.PropertyChanged += viewModel_PropertyChanged;
                 ActivateItem(viewModel);
+            }
+        }
+
+        void viewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsSelectedItem")
+            {
+                NotifyOfPropertyChange(() => SelectedItem);
             }
         }
 
         public IObservableCollection<IScreen> Layers
         {
             get { return Items; }
+        }
+
+        public IScreen SelectedItem
+        {
+            get
+            {
+                var item = Items.Cast<LayerViewModel>().Where(x => x.IsSelectedItem);
+                if (item.Count() != 1)
+                {
+                    return new LayerViewModel();
+                }
+                return item.First();
+            }
         }
     }
 }

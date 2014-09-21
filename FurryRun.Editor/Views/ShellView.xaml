@@ -18,6 +18,7 @@
             </MenuItem>
             <MenuItem Header="{DynamicResource View}">
                 <MenuItem Header="{DynamicResource Layers}" IsCheckable="True" IsChecked="{Binding LayersVisible}" />
+                <MenuItem Header="{DynamicResource Images}" IsCheckable="True" IsChecked="{Binding LayerItemsVisible}" />
             </MenuItem>
             <MenuItem Header="{DynamicResource Tools}">
                 <MenuItem Header="{DynamicResource Options}" Name="Options" />

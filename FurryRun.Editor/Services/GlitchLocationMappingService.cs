@@ -64,7 +64,8 @@ namespace FurryRun.Editor.Services
                     Y = Convert.ToInt32(obj.@int.Single(x => x.id == "y").Value) + middleGroundFixY,
                     ZIndex = Convert.ToInt32(obj.@int.Single(x => x.id == "z").Value),
                     Name = obj.str.Single(x => x.id == "name").Value,
-                    SpriteClass = String.Format("{0}.png", obj.str.Single(x => x.id == "sprite_class").Value)
+                    SpriteClass = String.Format("{0}.png", obj.str.Single(x => x.id == "sprite_class").Value),
+                    Visible = true,
                 };
                 var rotate = obj.@int.SingleOrDefault(x => x.id == "r");
                 if (rotate != null)
