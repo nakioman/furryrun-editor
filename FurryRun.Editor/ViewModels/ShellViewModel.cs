@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Dynamic;
 using System.Windows;
+using System.Windows.Controls;
 using Caliburn.Micro;
 using FurryRun.Editor.Infrastructure;
 using FurryRun.Editor.Model;
@@ -22,6 +23,7 @@ namespace FurryRun.Editor.ViewModels
 
         public ShellViewModel(IFileManipulationService fileManipulationService, ICustomWindowManager windowManager)
         {
+            _sliderValue = 1;
             _options = FileManipulationService.LoadOptions();
             _fileManipulationService = fileManipulationService;
             _windowManager = windowManager;
@@ -43,6 +45,7 @@ namespace FurryRun.Editor.ViewModels
                 _stageViewModel = new StageViewModel(stage);
                 _stageViewModel.PropertyChanged += _stageViewModel_PropertyChanged;
                 ActivateItem(_stageViewModel);
+                AutoAdjustZoom();
                 Layers();
                 LayerItems();
             }
@@ -163,6 +166,31 @@ namespace FurryRun.Editor.ViewModels
         {
             Exit();
             callback(true);
+        }
+
+        private double _sliderValue;
+        public double SliderValue
+        {
+            get { return _sliderValue; }
+            set
+            {
+                _sliderValue = value;
+                NotifyOfPropertyChange(() => SliderValue);
+            }
+        }
+
+        public void AutoAdjustZoom()
+        {
+            if (_stageViewModel != null)
+            {
+                var window = (Window)GetView();
+                var scrollViewer = (ScrollViewer)window.FindName("StageViewer");
+                if (_stageViewModel.Height > _stageViewModel.Width)
+                {
+                    SliderValue = scrollViewer.ViewportHeight / _stageViewModel.Height;
+                }
+                SliderValue = scrollViewer.ViewportWidth / _stageViewModel.Width;
+            }
         }
     }
 }

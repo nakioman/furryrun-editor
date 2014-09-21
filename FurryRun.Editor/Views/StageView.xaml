@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:FurryRun.Editor.ViewModels"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              mc:Ignorable="d" Width="{Binding Width}" Height="{Binding Height}"
-             cal:Bind.AtDesignTime="True"
+             cal:Bind.AtDesignTime="True" ClipToBounds="True"
              d:DataContext="{d:DesignInstance Type=vm:StageViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Canvas.Background>

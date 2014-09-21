@@ -151,5 +151,23 @@ namespace FurryRun.Editor.ViewModels
                 NotifyOfPropertyChange(() => Name);
             }
         }
+
+        private bool _isSelectedItem;
+
+        public bool IsSelectedItem
+        {
+            get { return _isSelectedItem; }
+            set
+            {
+                _isSelectedItem = value;
+                NotifyOfPropertyChange(() => IsSelectedItem);
+                NotifyOfPropertyChange(() => BorderThickness);
+            }
+        }
+
+        public int BorderThickness
+        {
+            get { return IsSelectedItem ? 5 : 0; }
+        }
     }
 }

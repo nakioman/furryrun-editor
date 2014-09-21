@@ -72,12 +72,21 @@ namespace FurryRun.Editor.ViewModels
         {
             get
             {
-                var item = Items.Cast<LayerViewModel>().Where(x => x.IsSelectedItem);
-                if (item.Count() != 1)
+                var items = Items.Cast<LayerViewModel>().Where(x => x.IsSelectedItem);
+                if (items.Count() != 1)
                 {
+                    if (items.Count() > 1)
+                    {
+                        foreach (var layerItem in items
+                            .SelectMany(layerViewModel => layerViewModel.Items.Cast<LayerItemViewModel>()
+                                .Where(x => x.IsSelectedItem)))
+                        {
+                            layerItem.IsSelectedItem = false;
+                        }
+                    }
                     return new LayerViewModel();
                 }
-                return item.First();
+                return items.First();
             }
         }
     }

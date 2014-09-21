@@ -2,11 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top" >
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
             <MenuItem Header="{DynamicResource File}">
                 <MenuItem Header="{DynamicResource LoadGlitchLocation}" Name="LoadLocation" >
                     <MenuItem.Icon>
@@ -23,9 +29,31 @@
             <MenuItem Header="{DynamicResource Tools}">
                 <MenuItem Header="{DynamicResource Options}" Name="Options" />
             </MenuItem>
+            <MenuItem HorizontalAlignment="Right">
+                <MenuItem.Template>
+                    <ControlTemplate>
+                        <DockPanel>
+                            <Button BorderThickness="0" Background="Transparent" cal:Message.Attach="AutoAdjustZoom">
+                                <Image Source="/Resources/Images/ZoomAdjust.png" Height="25"/>
+                            </Button>
+                            <Slider Width="100" VerticalAlignment="Center" Minimum="0.1" Maximum="1" 
+                                    Value="{Binding SliderValue}"/>
+                        </DockPanel>
+                    </ControlTemplate>
+                </MenuItem.Template>
+            </MenuItem>
         </Menu>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto">
-            <ContentControl x:Name="ActiveItem"></ContentControl>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" Name="StageViewer" >
+            <Grid RenderTransformOrigin="0.5,0.5">
+                <Grid.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="{Binding SliderValue}" ScaleY="{Binding SliderValue}"/>
+                    </TransformGroup>
+                </Grid.LayoutTransform>
+                <Viewbox Grid.Column="0" Grid.Row="0" >
+                    <ContentControl x:Name="ActiveItem"></ContentControl>
+                </Viewbox>
+            </Grid>
         </ScrollViewer>
     </DockPanel>
     <Window.InputBindings>
