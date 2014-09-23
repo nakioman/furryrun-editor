@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Windows.Media;
 using System.Xml;
 using System.Xml.Serialization;
 using Castle.Core.Logging;
@@ -75,7 +73,7 @@ namespace FurryRun.Editor.Services
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new Options();
             }

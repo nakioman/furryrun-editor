@@ -3,21 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
-using Caliburn.Micro.Logging;
 using Castle.Facilities.TypedFactory;
-using FurryRun.Editor.ViewModels;
 
 namespace FurryRun.Editor.Infrastructure
 {
     public class CastleBootstrapper<TRootViewModel> : BootstrapperBase
     {
         private ApplicationContainer _container;
-
-        static CastleBootstrapper()
-        {
-            LogManager.GetLog = type => new DebugLogger(type);
-        } 
-
+        
         public CastleBootstrapper()
         {
             Initialize();
