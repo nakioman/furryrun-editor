@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/I10N/Labels.en-US.xaml"/>
+                <ResourceDictionary Source="Adorners/DesignerItem.xaml"/>
                 <ResourceDictionary>
                     <local:EditorBootstrapper x:Key="bootstrapper" />
                 </ResourceDictionary>

@@ -1,9 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
 using Caliburn.Micro;
+using FurryRun.Editor.Adorners;
 using FurryRun.Editor.Model;
 using FurryRun.Editor.Services;
+using FurryRun.Editor.Views;
 
 namespace FurryRun.Editor.ViewModels
 {
@@ -95,6 +101,11 @@ namespace FurryRun.Editor.ViewModels
             {
                 return new Thickness(X - (Width / 2), Y - Height, 0, 0);
             }
+            set
+            {
+                X = (int) (value.Left + (Width / 2));
+                Y = (int) (value.Top + Height);
+            }
         }
 
         public int ScaleX
@@ -153,21 +164,27 @@ namespace FurryRun.Editor.ViewModels
         }
 
         private bool _isSelectedItem;
+       // private AdornerLayer _adornerLayer;
 
         public bool IsSelectedItem
         {
             get { return _isSelectedItem; }
             set
             {
+                //var view = (LayerItemView)GetView();
+                //var element = (UIElement)view.FindName("Image");
+                //if (value)
+                //{
+                //   // _adornerLayer = AdornerLayer.GetAdornerLayer(element);
+                //   // _adornerLayer.Add(new ResizingAdorner(element));
+                //}
+                //else if (_adornerLayer.GetAdorners(element).Any())
+                //{
+                //    _adornerLayer.Remove(_adornerLayer.GetAdorners(element)[0]);
+                //}
                 _isSelectedItem = value;
                 NotifyOfPropertyChange(() => IsSelectedItem);
-                NotifyOfPropertyChange(() => BorderThickness);
             }
-        }
-
-        public int BorderThickness
-        {
-            get { return IsSelectedItem ? 5 : 0; }
         }
     }
 }
