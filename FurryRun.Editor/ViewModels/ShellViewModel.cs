@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Dynamic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Caliburn.Micro;
 using FurryRun.Editor.Infrastructure;
 using FurryRun.Editor.Model;
@@ -190,6 +191,18 @@ namespace FurryRun.Editor.ViewModels
                     SliderValue = scrollViewer.ViewportHeight / _stageViewModel.Height;
                 }
                 SliderValue = scrollViewer.ViewportWidth / _stageViewModel.Width;
+            }
+        }
+
+        public void MouseWheelZoom(MouseWheelEventArgs eventArgs)
+        {
+            if (eventArgs.Delta > 0)
+            {
+                SliderValue += 0.1;
+            }
+            else if (SliderValue > 0.1)
+            {
+                SliderValue -= 0.1;
             }
         }
     }

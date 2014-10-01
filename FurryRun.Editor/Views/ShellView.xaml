@@ -50,7 +50,9 @@
                         <ScaleTransform ScaleX="{Binding SliderValue}" ScaleY="{Binding SliderValue}"/>
                     </TransformGroup>
                 </Grid.LayoutTransform>
-                <Viewbox Grid.Column="0" Grid.Row="0" >
+                <Viewbox Grid.Column="0" Grid.Row="0" 
+             cal:Message.Attach="[Event MouseWheel] = [Action MouseWheelZoom($eventArgs)]"
+                         >
                     <ContentControl x:Name="ActiveItem"></ContentControl>
                 </Viewbox>
             </Grid>
