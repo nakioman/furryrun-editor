@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Media;
+using FurryRun.Editor.Infrastructure;
 
 namespace FurryRun.Editor.Model
 {
@@ -11,6 +12,6 @@ namespace FurryRun.Editor.Model
         public int Height { get; set; }
         public Color TopGradientColor { get; set; }
         public Color BottomGradientColor { get; set; }
-        public SortedList<int, Layer> Layers { get; set; }
+        public SerializableSortedList<int, Layer> Layers { get; set; }
     }
 }

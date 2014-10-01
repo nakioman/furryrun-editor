@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
 using Castle.Core.Logging;
+using FurryRun.Editor.Infrastructure;
 using FurryRun.Editor.Model;
 
 namespace FurryRun.Editor.Services
@@ -23,9 +24,9 @@ namespace FurryRun.Editor.Services
             return stage;
         }
 
-        public SortedList<int, Layer> MapGlitchLayers(@object layerObj)
+        public SerializableSortedList<int, Layer> MapGlitchLayers(@object layerObj)
         {
-            var list = new SortedList<int, Layer>();
+            var list = new SerializableSortedList<int, Layer>();
             foreach (var obj in layerObj.object1)
             {
                 var layer = new Layer
@@ -43,9 +44,9 @@ namespace FurryRun.Editor.Services
             return list;
         }
 
-        public SortedList<int, LayerItem> MapGlitchItems(@object decos, Layer layer)
+        public SerializableSortedList<int, LayerItem> MapGlitchItems(@object decos, Layer layer)
         {
-            var items = new SortedList<int, LayerItem>();
+            var items = new SerializableSortedList<int, LayerItem>();
             //FIX middleground items, they are handle a bit different;
             var middleGroundFixX = 0;
             var middleGroundFixY = 0;
@@ -86,7 +87,7 @@ namespace FurryRun.Editor.Services
             return items;
         }
 
-        public IList<Filter> MapGlitchFilters(@object objs)
+        public List<Filter> MapGlitchFilters(@object objs)
         {
             var filters = new List<Filter>();
             foreach (var obj in objs.object1)

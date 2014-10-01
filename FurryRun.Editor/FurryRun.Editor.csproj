@@ -95,12 +95,14 @@
     <Compile Include="EditorBootstrapper.cs" />
     <Compile Include="Infrastructure\ApplicationContainer.cs" />
     <Compile Include="Infrastructure\CastleBootstrapper.cs" />
+    <Compile Include="Infrastructure\SerializableSortedList.cs" />
     <Compile Include="Infrastructure\CustomWindowManager.cs" />
     <Compile Include="Infrastructure\ForEachExtension.cs" />
     <Compile Include="Infrastructure\ICustomWindowManager.cs" />
     <Compile Include="Infrastructure\Installers\CaliburnInstaller.cs" />
     <Compile Include="Infrastructure\Installers\ServicesInstaller.cs" />
     <Compile Include="Infrastructure\Installers\ViewModelsInstaller.cs" />
+    <Compile Include="Infrastructure\SerializableGenerics.cs" />
     <Compile Include="Model\GlitchLocationModel.cs" />
     <Compile Include="Model\Options.cs" />
     <Compile Include="Services\FileManipulationService.cs" />

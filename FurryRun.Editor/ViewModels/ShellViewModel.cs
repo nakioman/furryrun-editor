@@ -20,6 +20,8 @@ namespace FurryRun.Editor.ViewModels
         private readonly Options _options;
         private Window _layersWindow;
         private Window _layerItemsWindow;
+        private double _sliderValue;
+        private string _saveFileName;
 
 
         public ShellViewModel(IFileManipulationService fileManipulationService, ICustomWindowManager windowManager)
@@ -169,7 +171,6 @@ namespace FurryRun.Editor.ViewModels
             callback(true);
         }
 
-        private double _sliderValue;
         public double SliderValue
         {
             get { return _sliderValue; }
@@ -203,6 +204,57 @@ namespace FurryRun.Editor.ViewModels
             else if (SliderValue > 0.1)
             {
                 SliderValue -= 0.1;
+            }
+        }
+
+
+        public void SaveAs()
+        {
+            var dlg = new SaveFileDialog()
+            {
+                DefaultExt = ".furry",
+                Filter = "Furry Run files (*.furry)|*.furry"
+            };
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                _saveFileName = dlg.FileName;
+                _fileManipulationService.SaveFurryRunFile(dlg.FileName, _stageViewModel.Stage);
+            }
+        }
+
+        public void Save()
+        {
+            if (!String.IsNullOrWhiteSpace(_saveFileName))
+            {
+                _fileManipulationService.SaveFurryRunFile(_saveFileName, _stageViewModel.Stage);
+            }
+            else
+            {
+                SaveAs();
+            }
+        }
+
+        public void Load()
+        {
+            var dlg = new OpenFileDialog
+            {
+                DefaultExt = ".furry",
+                Filter = "Furry Run files (*.furry)|*.furry|All files (*.*)|*.*"
+            };
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                _saveFileName = dlg.FileName;
+                var stage = _fileManipulationService.LoadFurryRunFile(dlg.FileName);
+                _stageViewModel = new StageViewModel(stage);
+                _stageViewModel.PropertyChanged += _stageViewModel_PropertyChanged;
+                ActivateItem(_stageViewModel);
+                AutoAdjustZoom();
+                Layers();
+                LayerItems();
             }
         }
     }

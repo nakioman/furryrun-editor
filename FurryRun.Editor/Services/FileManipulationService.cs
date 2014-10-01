@@ -83,8 +83,26 @@ namespace FurryRun.Editor.Services
         {
             using (var stream = new FileStream(OptionsFileName, FileMode.Create, FileAccess.Write))
             {
-                var xmlSerializer = new XmlSerializer(typeof (Options));
+                var xmlSerializer = new XmlSerializer(typeof(Options));
                 xmlSerializer.Serialize(stream, options);
+            }
+        }
+
+        public void SaveFurryRunFile(string fileName, Stage stage)
+        {
+            using (var stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            {
+                var xmlSerializer = new XmlSerializer(typeof(Stage));
+                xmlSerializer.Serialize(stream, stage);
+            }
+        }
+
+        public Stage LoadFurryRunFile(string fileName)
+        {
+            using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                var xmlSerializer = new XmlSerializer(typeof(Stage));
+                return (Stage) xmlSerializer.Deserialize(stream);
             }
         }
     }

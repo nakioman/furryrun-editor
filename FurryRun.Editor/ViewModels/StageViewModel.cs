@@ -89,5 +89,7 @@ namespace FurryRun.Editor.ViewModels
                 return items.First();
             }
         }
+
+        public Stage Stage { get { return _stage; } }
     }
 }

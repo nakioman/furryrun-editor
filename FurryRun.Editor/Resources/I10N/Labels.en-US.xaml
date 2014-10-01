@@ -13,4 +13,6 @@
     <system:String x:Key="Layers">Layers</system:String>
     <system:String x:Key="View">_VIEW</system:String>
     <system:String x:Key="Images">Images</system:String>
+    <system:String x:Key="SaveAs">Save as...</system:String>
+    <system:String x:Key="Load">Load...</system:String>
 </ResourceDictionary>

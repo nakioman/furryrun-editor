@@ -14,11 +14,14 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             <MenuItem Header="{DynamicResource File}">
+                <MenuItem Header="{DynamicResource Load}" Name="Load" />
                 <MenuItem Header="{DynamicResource LoadGlitchLocation}" Name="LoadLocation" >
                     <MenuItem.Icon>
                         <Image Source="/Resources/Images/ImportIcon.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="{DynamicResource Save}" Name="Save" />
+                <MenuItem Header="{DynamicResource SaveAs}" Name="SaveAs" />
                 <Separator />
                 <MenuItem Header="{DynamicResource Exit}" Name="Exit" InputGestureText="Alt+F4" />
             </MenuItem>
@@ -51,8 +54,7 @@
                     </TransformGroup>
                 </Grid.LayoutTransform>
                 <Viewbox Grid.Column="0" Grid.Row="0" 
-             cal:Message.Attach="[Event MouseWheel] = [Action MouseWheelZoom($eventArgs)]"
-                         >
+                         cal:Message.Attach="[Event MouseWheel] = [Action MouseWheelZoom($eventArgs)]" >
                     <ContentControl x:Name="ActiveItem"></ContentControl>
                 </Viewbox>
             </Grid>

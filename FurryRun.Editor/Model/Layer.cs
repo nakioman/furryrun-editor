@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FurryRun.Editor.Infrastructure;
 
 namespace FurryRun.Editor.Model
 {
@@ -6,7 +7,7 @@ namespace FurryRun.Editor.Model
     {
         public int ZIndex { get; set; }
         public string Name { get; set; }
-        public IList<Filter> Filters { get; set; }
+        public List<Filter> Filters { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
 
@@ -14,7 +15,7 @@ namespace FurryRun.Editor.Model
         //TODO add player to middleground
         //TODO Pathfinding
 
-        public SortedList<int, LayerItem> Items { get; set; }
+        public SerializableSortedList<int, LayerItem> Items { get; set; }
 
         public bool Visible { get; set; }
     }
